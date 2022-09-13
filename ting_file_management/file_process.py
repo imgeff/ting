@@ -14,13 +14,17 @@ def process(path_file, instance):
             "qtd_linhas": len(file),
             "linhas_do_arquivo": file
         }
-        instance.enqueue(file_processed)
+        instance.enqueue(path_file)
         print(file_processed, file=sys.stdout)
         files_processed[path_file] = file_processed
 
 
 def remove(instance):
-    """Aqui irá sua implementação"""
+    if (len(instance) >= 1):
+        file_removed = instance.dequeue()
+        print(f"Arquivo {file_removed} removido com sucesso", file=sys.stdout)
+    else:
+        print("Não há elementos", file=sys.stdout)
 
 
 def file_metadata(instance, position):
