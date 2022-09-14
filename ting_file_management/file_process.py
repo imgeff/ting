@@ -1,13 +1,14 @@
 import sys
 from ting_file_management.file_management import txt_importer
 
-files_processed = {}
-
 
 def process(path_file, instance):
-    try:
-        files_processed[path_file]
-    except KeyError:
+    queue = instance.getQueue()
+    isProcessed = False
+    for file in queue:
+        if (file["nome_do_arquivo"] == path_file):
+            isProcessed = True
+    if (isProcessed is False):
         file = txt_importer(path_file)
         file_processed = {
             "nome_do_arquivo": path_file,
@@ -16,7 +17,6 @@ def process(path_file, instance):
         }
         instance.enqueue(file_processed)
         print(file_processed, file=sys.stdout)
-        files_processed[path_file] = file_processed
 
 
 def remove(instance):

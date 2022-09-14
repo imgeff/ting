@@ -16,3 +16,6 @@ class Queue:
         if (index > self.__len__() - 1 or index < 0):
             raise IndexError()
         return self._data[index]
+
+    def getQueue(self):
+        return self._data
